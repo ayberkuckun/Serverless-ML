@@ -3,6 +3,7 @@ import modal
 
 LOCAL=True
 
+
 if LOCAL == False:
    stub = modal.Stub()
    image = modal.Image.debian_slim().apt_install(["libgomp1"]).pip_install(["hopsworks", "seaborn", "joblib", "scikit-learn"])
@@ -39,7 +40,7 @@ def g():
         query = iris_fg.select_all()
         feature_view = fs.create_feature_view(name="iris_modal",
                                           version=1,
-                                          description="Read from Iris flower dataset",
+                                          description="Read from Iris flower datasets",
                                           labels=["variety"],
                                           query=query)    
 

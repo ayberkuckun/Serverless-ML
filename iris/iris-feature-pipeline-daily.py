@@ -73,7 +73,7 @@ def g():
         name="iris_modal",
         version=1,
         primary_key=["sepal_length","sepal_width","petal_length","petal_width"], 
-        description="Iris flower dataset")
+        description="Iris flower datasets")
     iris_fg.insert(iris_df, write_options={"wait_for_job" : False})
 
 if __name__ == "__main__":

@@ -2,7 +2,6 @@ import gradio as gr
 import numpy as np
 from PIL import Image
 import requests
-
 import hopsworks
 import joblib
 
@@ -29,19 +28,19 @@ def iris(sepal_length, sepal_width, petal_length, petal_width):
     flower_url = "https://raw.githubusercontent.com/featurestoreorg/serverless-ml-course/main/src/01-module/assets/" + res[0] + ".png"
     img = Image.open(requests.get(flower_url, stream=True).raw)            
     return img
-        
+
+
 demo = gr.Interface(
     fn=iris,
     title="Iris Flower Predictive Analytics",
     description="Experiment with sepal/petal lengths/widths to predict which flower it is.",
     allow_flagging="never",
     inputs=[
-        gr.inputs.Number(default=1.0, label="sepal length (cm)"),
-        gr.inputs.Number(default=1.0, label="sepal width (cm)"),
+        gr.inputs.Number(default=20.0, label="sepal length (cm)"),
+        gr.inputs.Number(default=20.0, label="sepal width (cm)"),
         gr.inputs.Number(default=1.0, label="petal length (cm)"),
         gr.inputs.Number(default=1.0, label="petal width (cm)"),
         ],
     outputs=gr.Image(type="pil"))
 
 demo.launch()
-
