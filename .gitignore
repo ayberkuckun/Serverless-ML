@@ -1,1 +1,9 @@
 .idea/
+/iris/huggingface-spaces-iris/.hw_api_key
+/iris/huggingface-spaces-iris-monitor/.hw_api_key
+/iris/.hw_api_key
+/iris/actual_iris.png
+/iris/iris_model/confusion_matrix.png
+/iris/df_recent.png
+/iris/iris_model/iris_model.pkl
+/iris/latest_iris.png
