@@ -35,7 +35,7 @@ def g():
 
     feature_view = fs.get_feature_view(name="titanic_last_modal", version=1)
     batch_data = feature_view.get_batch_data()
-    print(f"Batch Size: {batch_data.size}")
+    print(f"Batch Size: {len(batch_data)}")
 
     y_pred = model.predict(batch_data)
     # print(y_pred)
