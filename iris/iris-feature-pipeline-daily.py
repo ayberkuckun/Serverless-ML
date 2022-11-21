@@ -4,8 +4,8 @@ BACKFILL = False
 LOCAL = True
 
 if not LOCAL:
-    stub = modal.Stub()
-    image = modal.Image.debian_slim().pip_install(["hopsworks", "joblib", "seaborn", "sklearn", "dataframe-image"])
+    stub = modal.Stub("iris_daily")
+    image = modal.Image.debian_slim().pip_install(["hopsworks==3.0.4"])
 
 
     @stub.function(image=image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("HOPSWORKS_API_KEY"))
@@ -79,5 +79,6 @@ if __name__ == "__main__":
     if LOCAL:
         g()
     else:
+        stub.deploy("iris_daily")
         with stub.run():
             f()
