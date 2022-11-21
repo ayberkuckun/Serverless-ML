@@ -21,13 +21,13 @@ def g():
     fs = project.get_feature_store()
     titanic_df = pd.read_csv("https://raw.githubusercontent.com/ID2223KTH/id2223kth.github.io/master/assignments/lab1"
                              "/titanic.csv")
-    titanic_df = clean_data(titanic_df)
+    titanic_clean_df = clean_data(titanic_df)
     titanic_fg = fs.get_or_create_feature_group(
         name="titanic_clean_modal",
         version=1,
-        primary_key=['Name', 'Sex', 'Age', 'Ticket', 'Embarked', 'Cabin', 'FamilySize', "Fare", "Pclass"],
+        primary_key=['Sex', 'Age', 'Ticket', 'FamilySize', "Fare", "Pclass"],
         description="Titanic clean dataset")
-    titanic_fg.insert(titanic_df, write_options={"wait_for_job": False})
+    titanic_fg.insert(titanic_clean_df, write_options={"wait_for_job": False})
 
 
 def clean_data(df):
