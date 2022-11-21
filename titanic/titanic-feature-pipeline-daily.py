@@ -66,6 +66,39 @@ def generate_passenger():
 
     cabin = random.choice(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'T', 'U'])
     df[f'Cabin_{cabin}'] = [1]
+    print(f"Outcome {df['Survived']} added.")
+
+    df = df.astype({
+        'Embarked_C': 'int32',
+        'Embarked_Q': 'int32',
+        'Embarked_S': 'int32',
+        "Name_Capt": 'int32',
+        "Name_Col": 'int32',
+        "Name_Countess": 'int32',
+        "Name_Don": 'int32',
+        "Name_Dr": 'int32',
+        "Name_Jonkheer": 'int32',
+        "Name_Lady": 'int32',
+        "Name_Major": 'int32',
+        "Name_Master": 'int32',
+        "Name_Miss": 'int32',
+        "Name_Mlle": 'int32',
+        "Name_Mme": 'int32',
+        "Name_Mr": 'int32',
+        "Name_Mrs": 'int32',
+        "Name_Ms": 'int32',
+        "Name_Rev": 'int32',
+        "Name_Sir": 'int32',
+        'Cabin_A': 'int32',
+        'Cabin_B': 'int32',
+        'Cabin_C': 'int32',
+        'Cabin_D': 'int32',
+        'Cabin_E': 'int32',
+        'Cabin_F': 'int32',
+        'Cabin_G': 'int32',
+        'Cabin_T': 'int32',
+        'Cabin_U': 'int32',
+    })
 
     return df
 
@@ -78,11 +111,7 @@ def g():
 
     titanic_synthetic_df = generate_passenger()
 
-    titanic_fg = fs.get_or_create_feature_group(
-        name="titanic_synthetic_modal",
-        version=1,
-        primary_key=['Sex', 'Age', 'Ticket', 'FamilySize', "Fare", "Pclass"],
-        description="Titanic synthetic dataset")
+    titanic_fg = fs.get_feature_group(name="titanic_last_modal", version=1)
     titanic_fg.insert(titanic_synthetic_df, write_options={"wait_for_job": False})
 
 

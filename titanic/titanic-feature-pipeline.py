@@ -23,7 +23,7 @@ def g():
                              "/titanic.csv")
     titanic_clean_df = clean_data(titanic_df)
     titanic_fg = fs.get_or_create_feature_group(
-        name="titanic_clean_modal",
+        name="titanic_last_modal",
         version=1,
         primary_key=['Sex', 'Age', 'Ticket', 'FamilySize', "Fare", "Pclass"],
         description="Titanic clean dataset")
