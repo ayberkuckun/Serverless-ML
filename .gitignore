@@ -3,7 +3,15 @@
 /iris/huggingface-spaces-iris-monitor/.hw_api_key
 /iris/.hw_api_key
 /iris/actual_iris.png
-/iris/iris_model/confusion_matrix.png
+/iris/iris_model/
 /iris/df_recent.png
-/iris/iris_model/iris_model.pkl
 /iris/latest_iris.png
+
+/titanic/huggingface-spaces-titanic/.hw_api_key
+/titanic/huggingface-spaces-titanic-monitor/.hw_api_key
+/titanic/.hw_api_key
+/titanic/actual_titanic.png
+/titanic/titanic_model/
+/titanic/df_recent.png
+/titanic/latest_titanic.png
+

@@ -1,4 +1,4 @@
 hopsworks
 joblib
 gradio
-scikit-learn
+xgboost

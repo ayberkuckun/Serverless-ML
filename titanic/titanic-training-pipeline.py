@@ -3,7 +3,7 @@ import modal
 
 LOCAL = True
 
-if LOCAL == False:
+if not LOCAL:
     stub = modal.Stub()
     image = modal.Image.debian_slim().apt_install(["libgomp1"]).pip_install(
         ["hopsworks", "seaborn", "joblib", "scikit-learn"])
@@ -18,12 +18,9 @@ def g():
     import hopsworks
     import pandas as pd
     import xgboost as xgb
-    from sklearn.neighbors import KNeighborsClassifier
-    from sklearn.metrics import accuracy_score
     from sklearn.metrics import confusion_matrix
     from sklearn.metrics import classification_report
     import seaborn as sns
-    from matplotlib import pyplot
     from hsml.schema import Schema
     from hsml.model_schema import ModelSchema
     import joblib
@@ -36,15 +33,15 @@ def g():
     # The feature view is the input set of features for your model. The features can come from different feature groups.
     # You can select features from different feature groups and join them together to create a feature view
     try:
-        feature_view = fs.get_feature_view(name="titanic_modal", version=2)
+        feature_view = fs.get_feature_view(name="titanic_modal", version=1)
     except:
-        titanic_fg = fs.get_feature_group(name="titanic_modal", version=2)
+        titanic_fg = fs.get_feature_group(name="titanic_clean_modal", version=1)
         query = titanic_fg.select_all()
         feature_view = fs.create_feature_view(name="titanic_modal",
-                                          version=2,
-                                          description="Read from Titanic datasets",
-                                          labels=["survived"],
-                                          query=query)
+                                              version=1,
+                                              description="Read from Titanic datasets",
+                                              labels=["survived"],
+                                              query=query)
 
     # You can read training data, randomly split into train/test sets of features (X) and labels (y)
     X_train, X_test, y_train, y_test = feature_view.train_test_split(0.2)
@@ -66,7 +63,7 @@ def g():
 
     # The contents of the 'titanic' directory will be saved to the model registry. Create the dir, first.
     model_dir = "titanic_model"
-    if os.path.isdir(model_dir) == False:
+    if not os.path.isdir(model_dir):
         os.mkdir(model_dir)
 
     # Save both our model and the confusion matrix to 'model_dir', whose contents will be uploaded to the model registry
@@ -89,8 +86,9 @@ def g():
     # Upload the model to the model registry, including all files in 'model_dir'
     titanic_model.save(model_dir)
 
+
 if __name__ == "__main__":
-    if LOCAL == True:
+    if LOCAL:
         g()
     else:
         with stub.run():
