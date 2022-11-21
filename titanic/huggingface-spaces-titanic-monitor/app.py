@@ -6,10 +6,10 @@ fs = project.get_feature_store()
 
 dataset_api = project.get_dataset_api()
 
-dataset_api.download("Resources/images/latest_titanic.png")
-dataset_api.download("Resources/images/actual_titanic.png")
-dataset_api.download("Resources/images/df_recent.png")
-dataset_api.download("Resources/images/confusion_matrix.png")
+dataset_api.download("Resources/titanic/images/latest_titanic.png")
+dataset_api.download("Resources/titanic/images/actual_titanic.png")
+dataset_api.download("Resources/titanic/images/df_recent.png")
+dataset_api.download("Resources/titanic/images/confusion_matrix.png")
 
 with gr.Blocks() as demo:
     with gr.Row():
