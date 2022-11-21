@@ -42,6 +42,7 @@ def clean_data(df):
     df["FamilySize"] = df.SibSp + df.Parch
     df = df.drop(["PassengerId", "SibSp", "Parch"], axis=1)
 
+    features = ['Embarked', "Name", "Cabin"]
     for f in features:
         numerical_col = pd.get_dummies(df[f], prefix=f)
         df = pd.concat([df, numerical_col], axis=1)
