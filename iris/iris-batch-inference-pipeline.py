@@ -45,7 +45,7 @@ def g():
     img = Image.open(requests.get(flower_url, stream=True).raw)
     img.save("./latest_iris.png")
     dataset_api = project.get_dataset_api()
-    dataset_api.upload("./latest_iris.png", "Resources/images", overwrite=True)
+    dataset_api.upload("./latest_iris.png", "Resources/iris/images", overwrite=True)
 
     iris_fg = fs.get_feature_group(name="iris_modal", version=1)
     df = iris_fg.read()
@@ -55,7 +55,7 @@ def g():
     print("Flower actual: " + label)
     img = Image.open(requests.get(label_url, stream=True).raw)
     img.save("./actual_iris.png")
-    dataset_api.upload("./actual_iris.png", "Resources/images", overwrite=True)
+    dataset_api.upload("./actual_iris.png", "Resources/iris/images", overwrite=True)
 
     monitor_fg = fs.get_or_create_feature_group(name="iris_predictions",
                                                 version=1,
@@ -79,7 +79,7 @@ def g():
 
     df_recent = history_df.tail(5)
     dfi.export(df_recent, './df_recent.png', table_conversion='matplotlib')
-    dataset_api.upload("./df_recent.png", "Resources/images", overwrite=True)
+    dataset_api.upload("./df_recent.png", "Resources/iris/images", overwrite=True)
 
     predictions = history_df[['prediction']]
     labels = history_df[['label']]
@@ -95,7 +95,7 @@ def g():
         cm = sns.heatmap(df_cm, annot=True)
         fig = cm.get_figure()
         fig.savefig("./confusion_matrix.png")
-        dataset_api.upload("./confusion_matrix.png", "Resources/images", overwrite=True)
+        dataset_api.upload("./confusion_matrix.png", "Resources/iris/images", overwrite=True)
     else:
         print("You need 3 different flower predictions to create the confusion matrix.")
         print("Run the batch inference pipeline more times until you get 3 different iris flower predictions")
