@@ -1,11 +1,11 @@
 import modal
 
-LOCAL = True
+LOCAL = False
 
 if not LOCAL:
-    stub = modal.Stub()
+    stub = modal.Stub("titanic_daily_inference")
     hopsworks_image = modal.Image.debian_slim().pip_install(
-        ["hopsworks", "joblib", "seaborn", "sklearn", "dataframe-image"])
+        ["scikit-learn", "hopsworks==3.0.4", "joblib", "seaborn", "xgboost", "dataframe-image"])
 
 
     @stub.function(image=hopsworks_image, schedule=modal.Period(days=1),
@@ -71,6 +71,11 @@ def g():
         'datetime': [now],
     }
     monitor_df = pd.DataFrame(data)
+    
+    monitor_df = monitor_df.astype({
+        'prediction': 'int32',
+    })
+
     monitor_fg.insert(monitor_df, write_options={"wait_for_job": False})
 
     history_df = monitor_fg.read()
@@ -106,5 +111,6 @@ if __name__ == "__main__":
     if LOCAL:
         g()
     else:
+        stub.deploy("titanic_daily_inference")
         with stub.run():
             f()

@@ -3,7 +3,7 @@ import modal
 LOCAL = True
 
 if not LOCAL:
-    stub = modal.Stub("titanic_daily")
+    stub = modal.Stub("titanic_daily_create_passenger")
     image = modal.Image.debian_slim().pip_install(["hopsworks==3.0.4"])
 
 
@@ -119,6 +119,6 @@ if __name__ == "__main__":
     if LOCAL:
         g()
     else:
-        stub.deploy("titanic_daily")
+        stub.deploy("titanic_daily_create_passenger")
         with stub.run():
             f()
